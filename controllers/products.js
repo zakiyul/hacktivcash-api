@@ -16,7 +16,7 @@ const product = (app) => {
   app.get("/api/product", (req, res) => {
     Product.find()
       .then((products) => {
-        res.json(products);
+        res.send(products);
       })
       .catch((err) => console.error(err));
   });
@@ -37,6 +37,14 @@ const product = (app) => {
         res.json({ info: "product removed!" });
       })
       .catch((err) => console.error(err));
+  });
+  //description
+  app.get("/api/product/desc/:id", (req, res) => {
+    Product.findOne({ _id: req.params.id })
+      .then((product) => {
+        res.send(product);
+      })
+      .catch((err) => console.log(err));
   });
 };
 
